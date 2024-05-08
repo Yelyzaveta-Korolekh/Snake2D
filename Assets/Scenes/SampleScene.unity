@@ -583,6 +583,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 8f43497b-01da-4ccc-9e07-3fb4f416a1ea
     m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d71f1aad-0fe7-440e-bce6-f5c51a61923c
+    m_ActionName: Player/Rotation[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
