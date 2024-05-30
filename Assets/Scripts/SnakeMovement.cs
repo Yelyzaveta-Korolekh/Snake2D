@@ -49,19 +49,28 @@ public class SnakeMovement : MonoBehaviour
     {
         _rotation = context.ReadValue<Vector2>();
         _snakeHead.transform.Translate(_moveDirection * _moveSpeed * Time.deltaTime);
-        RotateHead(_moveDirection);
-    }
+        RotateHead();
+    }   
 
-   private void RotateHead(Vector2 direct)
+   private void RotateHead()
     {
         if (_moveDirection == Vector2.up)
+        {
             _snakeHead.GetComponent<SpriteRenderer>().sprite = _HeadUp;
+        }
         else if (_moveDirection == Vector2.down)
-            _snakeHead.GetComponent<SpriteRenderer>().sprite = _HeadDown;
+        {
+            _snakeHead.GetComponent<SpriteRenderer>().sprite = _HeadDown; 
+        }
         else if (_moveDirection == Vector2.left)
+        {
             _snakeHead.GetComponent<SpriteRenderer>().sprite = _HeadLeft;
+        }  
         else if (_moveDirection == Vector2.right)
+        {
             _snakeHead.GetComponent<SpriteRenderer>().sprite = _HeadRight;
+        }
+            
     }
         
 
