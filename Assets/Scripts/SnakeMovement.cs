@@ -1,20 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class SnakeMovement : MonoBehaviour
 {
     [SerializeField] float _moveSpeed;
+    [SerializeField] GameObject _snakeHead;
+    [SerializeField] Sprite _HeadUp, _HeadDown, _HeadLeft, _HeadRight;
+
+
     private Rigidbody2D _rb;
     private Vector2 _moveDirection;
     private Vector2 _rotation;
     private SnakeInputSystem _inputActions;
-    private const int _rotateDegree = 90;
+
 
     private void Awake()
     {
+        
         _rb = GetComponent<Rigidbody2D>();
         _inputActions = new SnakeInputSystem();
         _inputActions.Player.Movement.performed += HandleMovement;
@@ -25,6 +32,7 @@ public class SnakeMovement : MonoBehaviour
     private void HandleMovement(InputAction.CallbackContext context)
     {
         _moveDirection = context.ReadValue<Vector2>();
+        Debug.Log("MoveDirection: " +  _moveDirection);
     }
 
     private void FixedUpdate()
@@ -40,18 +48,23 @@ public class SnakeMovement : MonoBehaviour
     private void RotateSnake(InputAction.CallbackContext context)
     {
         _rotation = context.ReadValue<Vector2>();
-        ChooseRotateDirection(_rotation);
+        _snakeHead.transform.Translate(_moveDirection * _moveSpeed * Time.deltaTime);
+        RotateHead(_moveDirection);
     }
 
-    private void ChooseRotateDirection(Vector2 rotate)
+   private void RotateHead(Vector2 direct)
     {
-        if (rotate.x < 0)
-        {
-            transform.Rotate(0,0, _rotateDegree);
-        }
-        else if (rotate.x > 0) {
-            transform.Rotate(0, 0, -_rotateDegree);
-        }
-        
+        if (_moveDirection == Vector2.up)
+            _snakeHead.GetComponent<SpriteRenderer>().sprite = _HeadUp;
+        else if (_moveDirection == Vector2.down)
+            _snakeHead.GetComponent<SpriteRenderer>().sprite = _HeadDown;
+        else if (_moveDirection == Vector2.left)
+            _snakeHead.GetComponent<SpriteRenderer>().sprite = _HeadLeft;
+        else if (_moveDirection == Vector2.right)
+            _snakeHead.GetComponent<SpriteRenderer>().sprite = _HeadRight;
     }
+        
+
+
+    
 }
